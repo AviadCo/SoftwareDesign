@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 public class ExampleTest {
 
-  //@Rule public Timeout globalTimeout = Timeout.seconds(10);
+  @Rule public Timeout globalTimeout = Timeout.seconds(10);
 
   private static GradesReader setupAndGetReader(String fileName) throws FileNotFoundException {
     String fileContents =
@@ -25,18 +25,18 @@ public class ExampleTest {
   @Test
   public void testSimple() throws Exception {
     GradesReader reader = setupAndGetReader("small");
-    assertEquals(reader.getGrade("123"), OptionalInt.of(100));
+    assertEquals(OptionalInt.of(100), reader.getGrade("123"));
   }
 
   @Test
   public void testEmpty() throws Exception {
     GradesReader reader = setupAndGetReader("small");
-    assertEquals(reader.getGrade("1234"), OptionalInt.empty());
+    assertEquals(OptionalInt.empty(), reader.getGrade("1234"));
   }
 
   @Test
   public void largeTest() throws Exception {
     GradesReader reader = setupAndGetReader("large");
-    assertEquals(reader.getGrade("123"), OptionalInt.of(100));
+    assertEquals(OptionalInt.of(100), reader.getGrade("123"));
   }
 }
