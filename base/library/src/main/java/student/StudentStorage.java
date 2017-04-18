@@ -3,18 +3,24 @@ package student;
 import java.util.List;
 import java.util.OptionalInt;
 
-import il.ac.technion.cs.sd.grades.ext.LineStorage;
+import externelLibraryWrapper.IStorage;
 
 /** This class will handle the application storage requests. */
 public class StudentStorage {
 
+	private IStorage iStorage;
+	
+	public StudentStorage(IStorage iStorage) {
+		this.iStorage = iStorage;
+	}
+	
 	public void addStudent(Student student) {
-		LineStorage.appendLine(student.toString());
+		iStorage.addItemToStorage(student.toString());
 	}
 	
 	public Integer getNumberOfStudents() {
 		try {
-			return LineStorage.numberOfLines();
+			return iStorage.getNumberOfItems();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			
@@ -24,7 +30,7 @@ public class StudentStorage {
 	
 	public Student getStudentByLine(int line) {
 		try {
-			return Student.fromString(LineStorage.read(line));
+			return Student.fromString(iStorage.getItemByIndex(line));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			

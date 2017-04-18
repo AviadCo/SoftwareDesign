@@ -2,6 +2,7 @@ package il.ac.technion.cs.sd.app;
 
 import java.util.OptionalInt;
 
+import externelLibraryWrapper.BasicStorage;
 import student.StudentStorage;
 
 /**
@@ -11,6 +12,6 @@ import student.StudentStorage;
 public class GradesReader {
   /** Returns the grade associated with the ID, or empty. */
   public OptionalInt getGrade(String id) {
-	  return new StudentStorage().findStudentByID(id).getGrade();
+	  return new StudentStorage(new BasicStorage()).findStudentByID(id).getGrade();
   }
 }

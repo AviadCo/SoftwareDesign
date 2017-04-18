@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import com.google.common.collect.Lists;
 
+import externelLibraryWrapper.BasicStorage;
 import student.Student;
 import student.StudentStorage;
 
@@ -23,6 +24,6 @@ public class GradesInitializer {
 	  
     	List<Student> studentsList = Arrays.asList(csvData.split(System.lineSeparator())).stream().map( s-> Student.fromString(s)).collect(Collectors.toList());
     	List<Student> reverseStudentsList = Lists.reverse(studentsList);
-    	new StudentStorage().addMultipleStudents(reverseStudentsList.stream().filter(s -> seen.putIfAbsent(s.getID(), Boolean.TRUE) == null).collect(Collectors.toList()));
+    	new StudentStorage(new BasicStorage()).addMultipleStudents(reverseStudentsList.stream().filter(s -> seen.putIfAbsent(s.getID(), Boolean.TRUE) == null).collect(Collectors.toList()));
   }
 }
