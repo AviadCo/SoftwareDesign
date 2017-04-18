@@ -39,7 +39,7 @@ public class StudentStorage {
 	}
 	
 	public void addMultipleStudents(List<Student> students) {
-		students.stream().forEach(s -> addStudent(s));
+		students.stream().sorted().forEach(s -> addStudent(s));
 	}
 	
 	/**
