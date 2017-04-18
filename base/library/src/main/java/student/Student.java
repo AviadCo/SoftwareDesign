@@ -1,30 +1,31 @@
 package student;
 
-import java.util.OptionalInt;
-
 /* This class will store the data of a Student. */
 public class Student {
 	private String ID;
-	private OptionalInt grade;
+	private Integer grade;
 	
+	//TODO try to remove this constructor
 	public Student() {
 		this.ID = "";
-		this.grade = OptionalInt.empty();
+		this.grade = 0;
 	}
 	
-	public Student(String iD, OptionalInt grade) {
+	public Student(String student) {
+		String studentArgs[] = student.split(",");
+		
+		this.ID = studentArgs[0];
+		this.grade = Integer.valueOf(studentArgs[1]);
+	}
+	
+	public Student(String iD, Integer grade) {
 		this.ID = iD;
 		this.grade = grade;
 	}
 
-	public static Student fromString(String student) {
-		String studentArgs[] = student.split(",");
-		
-		return new Student(studentArgs[0], OptionalInt.of(Integer.valueOf(studentArgs[1])));
-	}
-	
-	public String toString(Student student) {
-		return student.getID() + "," + student.getGrade();
+	@Override
+	public String toString() {
+		return getID() + "," + getGrade();
 	}
 	
 	public String getID() {
@@ -33,10 +34,34 @@ public class Student {
 	public void setID(String iD) {
 		ID = iD;
 	}
-	public OptionalInt getGrade() {
+	public Integer getGrade() {
 		return grade;
 	}
-	public void setGrade(OptionalInt grade) {
+	public void setGrade(Integer grade) {
 		this.grade = grade;
+	}
+	
+	@Override
+	public boolean equals(Object other){
+	    if (other == null) {
+	    	return false;
+	    }
+	    
+	    if (other == this) {
+	    	return true;
+	    } 
+	    
+	    if (!(other instanceof Student)) {
+	    	return false;
+	    }
+	    
+	    Student otherStudent = (Student) other;
+	    
+	    return otherStudent.getID().equals(ID) && otherStudent.getGrade().equals(grade);
+	}
+	
+	@Override
+	public int hashCode() {
+		return ID.hashCode();
 	}
 }

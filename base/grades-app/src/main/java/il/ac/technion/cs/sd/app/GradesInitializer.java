@@ -22,7 +22,7 @@ public class GradesInitializer {
   public void setup(String csvData) {
 	  	Map<String, Boolean> seen = new HashMap<String, Boolean>();
 	  
-    	List<Student> studentsList = Arrays.asList(csvData.split(System.lineSeparator())).stream().map( s-> Student.fromString(s)).collect(Collectors.toList());
+    	List<Student> studentsList = Arrays.asList(csvData.split(System.lineSeparator())).stream().map( s-> new Student(s)).collect(Collectors.toList());
     	List<Student> reverseStudentsList = Lists.reverse(studentsList);
     	new StudentStorage(new BasicStorage()).addMultipleStudents(reverseStudentsList.stream().filter(s -> seen.putIfAbsent(s.getID(), Boolean.TRUE) == null).collect(Collectors.toList()));
   }

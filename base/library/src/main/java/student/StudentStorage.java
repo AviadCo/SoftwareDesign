@@ -1,7 +1,7 @@
 package student;
 
 import java.util.List;
-import java.util.OptionalInt;
+import java.util.Optional;
 
 import externelLibraryWrapper.IStorage;
 
@@ -30,7 +30,7 @@ public class StudentStorage {
 	
 	public Student getStudentByLine(int line) {
 		try {
-			return Student.fromString(iStorage.getItemByIndex(line));
+			return new Student(iStorage.getItemByIndex(line));
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 			
@@ -47,20 +47,24 @@ public class StudentStorage {
 	 * 
 	 * If Student dosen't exist it's grade will me OptionalInt.empty().
 	 *  */
-	public Student findStudentByID(String ID) {
+	public Optional<Student> findStudentByID(String ID) {
 		Integer numberOfLines = getNumberOfStudents();
 		Integer lowLine, highLine;
 
+		if (numberOfLines == 0) {
+			return Optional.empty();
+		}
+		
 		lowLine = 0;
 		highLine = numberOfLines - 1;
-		
+				
 		while (lowLine <= highLine) {
 			int currentLine = (lowLine + highLine) / 2;
 			Student currentStudent = getStudentByLine(currentLine);
 			int compareResult = currentStudent.getID().compareTo(ID);
 			
 			if (compareResult == 0) {
-				return currentStudent;
+				return Optional.of(currentStudent);
 			} else if (compareResult < 0) {
 				lowLine = currentLine + 1;
 			} else {
@@ -68,6 +72,6 @@ public class StudentStorage {
 			}
 		}
 		
-		return new Student(ID, OptionalInt.empty());
+		return Optional.empty();
 	}
 }
