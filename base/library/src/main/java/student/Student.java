@@ -1,7 +1,7 @@
 package student;
 
 /* This class will store the data of a Student. */
-public class Student {
+public class Student implements Comparable<Student> {
 	private String ID;
 	private Integer grade;
 	
@@ -63,5 +63,10 @@ public class Student {
 	@Override
 	public int hashCode() {
 		return ID.hashCode();
+	}
+
+	@Override
+	public int compareTo(Student other) {
+		return ID.compareTo(other.getID());
 	}
 }
