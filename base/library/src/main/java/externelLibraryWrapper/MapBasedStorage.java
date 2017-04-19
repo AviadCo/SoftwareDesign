@@ -26,7 +26,11 @@ public class MapBasedStorage implements IStorage {
 	@Override
 	public String getItemByIndex(int index) throws InterruptedException {
 		if (mapStorage.containsKey(index)) {
-			return mapStorage.get(index);
+			String result = mapStorage.get(index);
+			
+			Thread.sleep(result.length());
+			
+			return result;
 		} else {
 			return null;
 		}
@@ -34,6 +38,8 @@ public class MapBasedStorage implements IStorage {
 
 	@Override
 	public int getNumberOfItems() throws InterruptedException {
+		Thread.sleep(100);
+		
 		return mapStorage.size();
 	}
 }

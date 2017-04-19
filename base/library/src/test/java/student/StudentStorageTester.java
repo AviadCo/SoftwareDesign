@@ -22,7 +22,7 @@ public class StudentStorageTester {
 
 	private final String DEFAULT_ID = "01234";	
 	private final String MISSING_ID = "00000";
-
+	
 	@Mock
 	private IStorage iStorage;
 	
@@ -32,13 +32,13 @@ public class StudentStorageTester {
 		studentStorage = new StudentStorage(iStorage);
 	}
 	
-	@Test
+	@Test (timeout = 500)
 	public void findStudentByIDWithEmptyStorage()
 	{
 		assertEquals(studentStorage.findStudentByID(DEFAULT_ID), Optional.empty());
 	}
 	
-	@Test
+	@Test (timeout = 500)
 	public void findStudentByIDWhenIDExists()
 	{
 		List<Student> studentsList = new ArrayList<>();
@@ -51,7 +51,7 @@ public class StudentStorageTester {
 		assertEquals(studentStorage.findStudentByID(DEFAULT_ID), Optional.of(student));
 	}
 	
-	@Test
+	@Test (timeout = 500)
 	public void findStudentByIDWhenIDDoesNotExist()
 	{
 		List<Student> studentsList = new ArrayList<>();
@@ -63,7 +63,7 @@ public class StudentStorageTester {
 		assertEquals(studentStorage.findStudentByID(MISSING_ID), Optional.empty());
 	}
 	
-	@Test
+	@Test (timeout = 500)
 	public void findStudentByIDCheckRightGrade()
 	{
 		List<Student> studentsList = new ArrayList<>();
@@ -76,7 +76,7 @@ public class StudentStorageTester {
 		assertNotEquals(studentStorage.findStudentByID(DEFAULT_ID).get().getGrade(), Integer.valueOf(50));
 	}
 	
-	@Test
+	@Test (timeout = 1000)
 	public void findStudentByIDMultipleIDs()
 	{
 		List<Student> studentsList = new ArrayList<>();
@@ -96,7 +96,7 @@ public class StudentStorageTester {
 		assertEquals(studentStorage.findStudentByID("4"), Optional.of(new Student("4", 89)));
 	}
 	
-	@Test
+	@Test (timeout = 2000)
 	public void findStudentByIDSorting()
 	{
 		List<Student> studentsList = new ArrayList<>();
@@ -127,7 +127,7 @@ public class StudentStorageTester {
 		assertEquals(studentStorage.findStudentByID("10484204"), Optional.of(new Student("10484204", 96)));
 	}
 	
-	@Test
+	@Test (timeout = 500)
 	public void getNumberOfStudents()
 	{
 		List<Student> studentsList = new ArrayList<>();
