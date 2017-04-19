@@ -14,21 +14,7 @@ public class StudentStorage {
 		this.iStorage = iStorage;
 	}
 	
-	public void addStudent(Student student) {
-		iStorage.addItemToStorage(student.toString());
-	}
-	
-	public Integer getNumberOfStudents() {
-		try {
-			return iStorage.getNumberOfItems();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			
-			throw new RuntimeException();
-		}
-	}
-	
-	public Student getStudentByLine(int line) {
+	private Student getStudentByLine(int line) {
 		try {
 			return new Student(iStorage.getItemByIndex(line));
 		} catch (InterruptedException e) {
@@ -38,6 +24,39 @@ public class StudentStorage {
 		}
 	}
 	
+	/**
+	 * Add one student to the database
+	 * 
+	 * This function does not maintain the sort order achieved in 'addMultipleStudents'.
+	 * 
+	 * @param student - a student to add to the storage
+	 */
+	private void addStudent(Student student) {
+		iStorage.addItemToStorage(student.toString());
+	}
+	
+	/**
+	 * Returns the number of students in database
+	 * 
+	 * @return - number of students in database
+	 */
+	public Integer getNumberOfStudents() {
+		try {
+			return iStorage.getNumberOfItems();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			
+			throw new RuntimeException();
+		}
+	}
+		
+	/**
+	 * Add multiple students at once
+	 * 
+	 * Do not add multiple students more than once since the database sorting won't be maintained
+	 * 
+	 * @param students - list of students to add
+	 */
 	public void addMultipleStudents(List<Student> students) {
 		students.stream().sorted().forEach(s -> addStudent(s));
 	}
@@ -45,7 +64,9 @@ public class StudentStorage {
 	/**
 	 * findStudentByID - returns Student by it's ID using binary search algorithm.
 	 * 
-	 * If Student dosen't exist it's grade will me OptionalInt.empty().
+	 * If database is not sorted (because of multiple uses of 'addMultipleStudents') the search won't work!
+	 * 
+	 * If Student dosen't exist returns Optional.empty().
 	 *  */
 	public Optional<Student> findStudentByID(String ID) {
 		Integer numberOfLines = getNumberOfStudents();

@@ -41,27 +41,37 @@ public class StudentStorageTester {
 	@Test
 	public void findStudentByIDWhenIDExists()
 	{
+		List<Student> studentsList = new ArrayList<>();
+
 		Student student = new Student(DEFAULT_ID, 100);
 		
-		studentStorage.addStudent(student);
+		studentsList.add(student);
+		
+		studentStorage.addMultipleStudents(studentsList);
 		assertEquals(studentStorage.findStudentByID(DEFAULT_ID), Optional.of(student));
 	}
 	
 	@Test
 	public void findStudentByIDWhenIDDoesNotExist()
 	{
+		List<Student> studentsList = new ArrayList<>();
 		Student student = new Student(DEFAULT_ID, 100);
 		
-		studentStorage.addStudent(student);
+		studentsList.add(student);
+		
+		studentStorage.addMultipleStudents(studentsList);
 		assertEquals(studentStorage.findStudentByID(MISSING_ID), Optional.empty());
 	}
 	
 	@Test
 	public void findStudentByIDCheckRightGrade()
 	{
+		List<Student> studentsList = new ArrayList<>();
 		Student student = new Student(DEFAULT_ID, 72);
+
+		studentsList.add(student);
 		
-		studentStorage.addStudent(student);
+		studentStorage.addMultipleStudents(studentsList);
 		assertEquals(studentStorage.findStudentByID(DEFAULT_ID).get().getGrade(), student.getGrade());
 		assertNotEquals(studentStorage.findStudentByID(DEFAULT_ID).get().getGrade(), Integer.valueOf(50));
 	}
