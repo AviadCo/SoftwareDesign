@@ -116,4 +116,20 @@ public class StudentStorageTester {
 		assertEquals(studentStorage.findStudentByID("72"), Optional.of(new Student("72", 3)));
 		assertEquals(studentStorage.findStudentByID("10484204"), Optional.of(new Student("10484204", 96)));
 	}
+	
+	@Test
+	public void getNumberOfStudents()
+	{
+		List<Student> studentsList = new ArrayList<>();
+		
+		studentsList.add(new Student("0", 100));
+		studentsList.add(new Student("1", 68));
+		studentsList.add(new Student("4", 89));
+		studentsList.add(new Student("2", 5));
+		studentsList.add(new Student("3", 100));
+		
+		studentStorage.addMultipleStudents(studentsList);
+		
+		assertEquals(studentStorage.getNumberOfStudents(), Integer.valueOf(5));
+	}
 }
