@@ -13,10 +13,16 @@ import student.StudentStorage;
  */
 public class GradesReader {
   /** Returns the grade associated with the ID, or empty. */
+	
+  public OptionalInt praseStudentGrade(Optional<Student> student)
+  {
+	  return student.isPresent() ? OptionalInt.of(student.get().getGrade()) :
+		  						   OptionalInt.empty();
+  }
+	
   public OptionalInt getGrade(String id) {
 	  Optional<Student> student = new StudentStorage(new BasicStorage()).findStudentByID(id);
 	  
-	  return student.isPresent() ? OptionalInt.of(student.get().getGrade()) :
-		  						   OptionalInt.empty();
+	  return praseStudentGrade(student);
   }
 }
