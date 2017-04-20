@@ -23,14 +23,14 @@ public class GradesReaderTester {
 	@Test
 	public void parseStudentEmpty()
 	{    	
-    	assertEquals(gradesReader.praseStudentGrade(Optional.empty()), OptionalInt.empty());
+    	assertEquals(gradesReader.parseStudentGrade(Optional.empty()), OptionalInt.empty());
 	}
 	
 	@Test
 	public void parseStudentWithGrade()
 	{    	
-    	assertEquals(gradesReader.praseStudentGrade(Optional.of(new Student("123", 55))), OptionalInt.of(55));
-    	assertEquals(gradesReader.praseStudentGrade(Optional.of(new Student("123", 63))), OptionalInt.of(63));
-    	assertEquals(gradesReader.praseStudentGrade(Optional.of(new Student("264", 15))), OptionalInt.of(15));
+    	assertEquals(gradesReader.parseStudentGrade(Optional.of(new Student("123", 55))), OptionalInt.of(55));
+    	assertEquals(gradesReader.parseStudentGrade(Optional.of(new Student("123", 63))), OptionalInt.of(63));
+    	assertEquals(gradesReader.parseStudentGrade(Optional.of(new Student("264", 15))), OptionalInt.of(15));
 	}
 }
