@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import externelLibraryWrapper.BasicStorage;
+import student.IStudentsDatabase;
 import student.Student;
 import student.StudentsDatabase;
 
@@ -18,6 +19,16 @@ public class GradesInitializer {
    * Saves the csvData persistently, so that it could be run using GradesRunner.
    * The format of each line of the data is $id,$grade.
    */
+	
+	IStudentsDatabase studentsDB;
+	
+	public GradesInitializer(){
+		studentsDB = new StudentsDatabase(new BasicStorage());
+	}
+	
+	public GradesInitializer(IStudentsDatabase studentsDatabase){
+		studentsDB = studentsDatabase;
+	}
 	
 	public List<Student> parseData(String csvData) {
 	  	Map<String, Boolean> seen = new HashMap<String, Boolean>();
@@ -37,6 +48,6 @@ public class GradesInitializer {
 	}
 	
 	public void setup(String csvData) {
-		new StudentsDatabase(new BasicStorage()).add(parseData(csvData));
+		studentsDB.add(parseData(csvData));
 	}
 }
