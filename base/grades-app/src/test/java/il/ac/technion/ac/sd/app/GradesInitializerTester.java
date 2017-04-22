@@ -6,8 +6,11 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+import org.mockito.internal.matchers.Any;
 
 import il.ac.technion.cs.sd.app.GradesInitializer;
+import student.IStudentsDatabase;
 import student.Student;
 
 public class GradesInitializerTester {
@@ -80,5 +83,32 @@ public class GradesInitializerTester {
 		assertTrue(studentsList.contains(new Student("555", 42)));
 		assertTrue(studentsList.contains(new Student("243", 15)));
 		assertTrue(studentsList.contains(new Student("987", 72)));
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testSetupAddingItemToStorage()
+	{
+		/* This test checks that only the last grade will be in the list */
+		String csvData = "";
+		
+		csvData += new Student("012", 100).toString() + System.lineSeparator();
+		csvData += new Student("987", 11).toString() + System.lineSeparator();
+		csvData += new Student("243", 21).toString() + System.lineSeparator();
+		csvData += new Student("444", 33).toString() + System.lineSeparator();
+		csvData += new Student("999999", 65).toString() + System.lineSeparator();		
+		csvData += new Student("987", 52).toString() + System.lineSeparator();
+		csvData += new Student("555", 42).toString() + System.lineSeparator();
+		csvData += new Student("243", 15).toString() + System.lineSeparator();
+		csvData += new Student("987", 72).toString() + System.lineSeparator();
+				
+    	IStudentsDatabase studentDBMock = Mockito.mock(IStudentsDatabase.class);
+    	
+    	GradesInitializer gradesInit = new GradesInitializer(studentDBMock);
+    	gradesInit.setup(csvData);
+    	
+    	
+    	Mockito.verify(studentDBMock, Mockito.atLeastOnce()).add((List<Student>) Mockito.any());
+    	
 	}
 }
