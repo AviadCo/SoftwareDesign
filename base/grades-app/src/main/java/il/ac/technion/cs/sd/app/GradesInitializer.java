@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import externelLibraryWrapper.BasicStorage;
 import student.Student;
-import student.StudentStorage;
+import student.StudentsDatabase;
 
 /** This class will be instantiated once per test. */
 public class GradesInitializer {
@@ -37,6 +37,6 @@ public class GradesInitializer {
 	}
 	
 	public void setup(String csvData) {
-		new StudentStorage(new BasicStorage()).addMultipleStudents(parseData(csvData));
+		new StudentsDatabase(new BasicStorage()).add(parseData(csvData));
 	}
 }

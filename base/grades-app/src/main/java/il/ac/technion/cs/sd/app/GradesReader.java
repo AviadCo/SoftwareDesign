@@ -5,7 +5,7 @@ import java.util.OptionalInt;
 
 import externelLibraryWrapper.BasicStorage;
 import student.Student;
-import student.StudentStorage;
+import student.StudentsDatabase;
 
 /**
  * This class will only be instantiated after
@@ -21,7 +21,7 @@ public class GradesReader {
   }
 	
   public OptionalInt getGrade(String id) {
-	  Optional<Student> student = new StudentStorage(new BasicStorage()).findStudentByID(id);
+	  Optional<Student> student = new StudentsDatabase(new BasicStorage()).findStudentByID(id);
 	  
 	  return parseStudentGrade(student);
   }

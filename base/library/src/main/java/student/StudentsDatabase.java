@@ -6,11 +6,11 @@ import java.util.Optional;
 import externelLibraryWrapper.IStorage;
 
 /** This class will handle the application storage requests. */
-public class StudentStorage {
+public class StudentsDatabase implements IStudentsDatabase {
 
 	private IStorage iStorage;
 	
-	public StudentStorage(IStorage iStorage) {
+	public StudentsDatabase(IStorage iStorage) {
 		this.iStorage = iStorage;
 	}
 	
@@ -24,22 +24,18 @@ public class StudentStorage {
 		}
 	}
 	
-	/**
-	 * Add one student to the database
-	 * 
-	 * This function does not maintain the sort order achieved in 'addMultipleStudents'.
-	 * 
-	 * @param student - a student to add to the storage
+	/* (non-Javadoc)
+	 * @see student.IStudentsDatabase#addStudent(student.Student)
 	 */
-	private void addStudent(Student student) {
+	@Override
+	public void add(Student student) {
 		iStorage.addItemToStorage(student.toString());
 	}
 	
-	/**
-	 * Returns the number of students in database
-	 * 
-	 * @return - number of students in database
+	/* (non-Javadoc)
+	 * @see student.IStudentsDatabase#getNumberOfStudents()
 	 */
+	@Override
 	public Integer getNumberOfStudents() {
 		try {
 			return iStorage.getNumberOfItems();
@@ -50,24 +46,18 @@ public class StudentStorage {
 		}
 	}
 		
-	/**
-	 * Add multiple students at once
-	 * 
-	 * Do not add multiple students more than once since the database sorting won't be maintained
-	 * 
-	 * @param students - list of students to add
+	/* (non-Javadoc)
+	 * @see student.IStudentsDatabase#addMultipleStudents(java.util.List)
 	 */
-	public void addMultipleStudents(List<Student> students) {
-		students.stream().sorted().forEach(s -> addStudent(s));
+	@Override
+	public void add(List<Student> students) {
+		students.stream().sorted().forEach(s -> add(s));
 	}
 	
-	/**
-	 * findStudentByID - returns Student by it's ID using binary search algorithm.
-	 * 
-	 * If database is not sorted (because of multiple uses of 'addMultipleStudents') the search won't work!
-	 * 
-	 * If Student dosen't exist returns Optional.empty().
-	 *  */
+	/* (non-Javadoc)
+	 * @see student.IStudentsDatabase#findStudentByID(java.lang.String)
+	 */
+	@Override
 	public Optional<Student> findStudentByID(String ID) {
 		Integer numberOfLines = getNumberOfStudents();
 		Integer lowLine, highLine;

@@ -18,7 +18,7 @@ import externelLibraryWrapper.MapBasedStorage;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StudentStorageTester {
-	private StudentStorage studentStorage;
+	private IStudentsDatabase studentStorage;
 
 	private final String DEFAULT_ID = "01234";	
 	private final String MISSING_ID = "00000";
@@ -29,7 +29,7 @@ public class StudentStorageTester {
 	@Before
 	public void setup() {
 		iStorage = Mockito.spy(new MapBasedStorage());
-		studentStorage = new StudentStorage(iStorage);
+		studentStorage = new StudentsDatabase(iStorage);
 	}
 	
 	@Test (timeout = 500)
@@ -47,7 +47,7 @@ public class StudentStorageTester {
 		
 		studentsList.add(student);
 		
-		studentStorage.addMultipleStudents(studentsList);
+		studentStorage.add(studentsList);
 		assertEquals(studentStorage.findStudentByID(DEFAULT_ID), Optional.of(student));
 	}
 	
@@ -59,7 +59,7 @@ public class StudentStorageTester {
 		
 		studentsList.add(student);
 		
-		studentStorage.addMultipleStudents(studentsList);
+		studentStorage.add(studentsList);
 		assertEquals(studentStorage.findStudentByID(MISSING_ID), Optional.empty());
 	}
 	
@@ -71,7 +71,7 @@ public class StudentStorageTester {
 
 		studentsList.add(student);
 		
-		studentStorage.addMultipleStudents(studentsList);
+		studentStorage.add(studentsList);
 		assertEquals(studentStorage.findStudentByID(DEFAULT_ID).get().getGrade(), student.getGrade());
 		assertNotEquals(studentStorage.findStudentByID(DEFAULT_ID).get().getGrade(), Integer.valueOf(50));
 	}
@@ -87,7 +87,7 @@ public class StudentStorageTester {
 		studentsList.add(new Student("3", 100));
 		studentsList.add(new Student("4", 89));
 
-		studentStorage.addMultipleStudents(studentsList);
+		studentStorage.add(studentsList);
 		
 		assertEquals(studentStorage.findStudentByID("0"), Optional.of(new Student("0", 100)));
 		assertEquals(studentStorage.findStudentByID("1"), Optional.of(new Student("1", 68)));
@@ -113,7 +113,7 @@ public class StudentStorageTester {
 		studentsList.add(new Student("10484204", 96));
 
 
-		studentStorage.addMultipleStudents(studentsList);
+		studentStorage.add(studentsList);
 		
 		assertEquals(studentStorage.findStudentByID("0"), Optional.of(new Student("0", 100)));
 		assertEquals(studentStorage.findStudentByID("1"), Optional.of(new Student("1", 68)));
@@ -138,7 +138,7 @@ public class StudentStorageTester {
 		studentsList.add(new Student("2", 5));
 		studentsList.add(new Student("3", 100));
 		
-		studentStorage.addMultipleStudents(studentsList);
+		studentStorage.add(studentsList);
 		
 		assertEquals(studentStorage.getNumberOfStudents(), Integer.valueOf(5));
 	}
