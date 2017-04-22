@@ -4,6 +4,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 
 import externelLibraryWrapper.BasicStorage;
+import student.IStudentsDatabase;
 import student.Student;
 import student.StudentsDatabase;
 
@@ -13,16 +14,26 @@ import student.StudentsDatabase;
  */
 public class GradesReader {
   /** Returns the grade associated with the ID, or empty. */
+
+	private IStudentsDatabase studentsDB;
 	
-  public OptionalInt parseStudentGrade(Optional<Student> student)
-  {
-	  return student.isPresent() ? OptionalInt.of(student.get().getGrade()) :
-		  						   OptionalInt.empty();
-  }
+	public GradesReader() {
+		this.studentsDB = new StudentsDatabase(new BasicStorage());
+	}
 	
-  public OptionalInt getGrade(String id) {
-	  Optional<Student> student = new StudentsDatabase(new BasicStorage()).findStudentByID(id);
+	public GradesReader(IStudentsDatabase studentsDB) {
+		this.studentsDB = studentsDB;
+	}
+
+	public OptionalInt parseStudentGrade(Optional<Student> student)
+	{
+		return student.isPresent() ? OptionalInt.of(student.get().getGrade()) :
+			OptionalInt.empty();
+	}
+	
+	public OptionalInt getGrade(String id) {
+		Optional<Student> student = studentsDB.findStudentByID(id);
 	  
-	  return parseStudentGrade(student);
-  }
+		return parseStudentGrade(student);
+	}
 }
