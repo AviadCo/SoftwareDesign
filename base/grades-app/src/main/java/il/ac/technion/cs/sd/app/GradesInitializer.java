@@ -20,7 +20,7 @@ public class GradesInitializer {
    * The format of each line of the data is $id,$grade.
    */
 	
-	IStudentsDatabase studentsDB;
+	private IStudentsDatabase studentsDB;
 	
 	public GradesInitializer(){
 		studentsDB = new StudentsDatabase(new BasicStorage());
