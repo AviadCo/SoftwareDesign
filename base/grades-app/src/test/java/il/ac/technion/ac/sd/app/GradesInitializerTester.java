@@ -7,7 +7,6 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.mockito.internal.matchers.Any;
 
 import il.ac.technion.cs.sd.app.GradesInitializer;
 import student.IStudentsDatabase;
@@ -109,6 +108,32 @@ public class GradesInitializerTester {
     	
     	
     	Mockito.verify(studentDBMock, Mockito.atLeastOnce()).add((List<Student>) Mockito.any());
+    	
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testSetupNotCrashedFromNull()
+	{
+				
+    	IStudentsDatabase studentDBMock = Mockito.mock(IStudentsDatabase.class);
+    	
+    	GradesInitializer gradesInit = new GradesInitializer(studentDBMock);
+    	gradesInit.setup(null);
+    	
+    	Mockito.verify(studentDBMock, Mockito.never()).add((List<Student>) Mockito.any());
+    	
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testSetupNotCrashedFromEmptyString()
+	{
+				
+    	IStudentsDatabase studentDBMock = Mockito.mock(IStudentsDatabase.class);
+    	
+    	GradesInitializer gradesInit = new GradesInitializer(studentDBMock);
+    	gradesInit.setup(new String());
     	
 	}
 }

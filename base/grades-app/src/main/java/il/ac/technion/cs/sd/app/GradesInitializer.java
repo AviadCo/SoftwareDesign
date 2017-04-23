@@ -48,6 +48,10 @@ public class GradesInitializer {
 	}
 	
 	public void setup(String csvData) {
+		if (csvData == null){
+			return;
+		}
+		
 		studentsDB.add(parseData(csvData));
 	}
 }
