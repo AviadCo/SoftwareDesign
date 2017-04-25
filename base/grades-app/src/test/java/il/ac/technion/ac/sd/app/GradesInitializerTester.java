@@ -34,11 +34,11 @@ public class GradesInitializerTester {
 	{
 		String csvData = "";
 		
-		csvData += new Student("012", 100).toString() + System.lineSeparator();
-		csvData += new Student("987", 11).toString() + System.lineSeparator();
-		csvData += new Student("243", 21).toString() + System.lineSeparator();
-		csvData += new Student("444", 33).toString() + System.lineSeparator();
-		csvData += new Student("999999", 65).toString() + System.lineSeparator();		
+		csvData += new Student("012", 100).toString() + "\n";
+		csvData += new Student("987", 11).toString() + "\n";
+		csvData += new Student("243", 21).toString() + "\n";
+		csvData += new Student("444", 33).toString() + "\n";
+		csvData += new Student("999999", 65).toString() + "\n";		
 		
     	List<Student> studentsList = gradesInitializer.parseData(csvData);
 				
@@ -61,15 +61,15 @@ public class GradesInitializerTester {
 		/* This test checks that only the last grade will be in the list */
 		String csvData = "";
 		
-		csvData += new Student("012", 100).toString() + System.lineSeparator();
-		csvData += new Student("987", 11).toString() + System.lineSeparator();
-		csvData += new Student("243", 21).toString() + System.lineSeparator();
-		csvData += new Student("444", 33).toString() + System.lineSeparator();
-		csvData += new Student("999999", 65).toString() + System.lineSeparator();		
-		csvData += new Student("987", 52).toString() + System.lineSeparator();
-		csvData += new Student("555", 42).toString() + System.lineSeparator();
-		csvData += new Student("243", 15).toString() + System.lineSeparator();
-		csvData += new Student("987", 72).toString() + System.lineSeparator();
+		csvData += new Student("012", 100).toString() + "\n";
+		csvData += new Student("987", 11).toString() + "\n";
+		csvData += new Student("243", 21).toString() + "\n";
+		csvData += new Student("444", 33).toString() + "\n";
+		csvData += new Student("999999", 65).toString() + "\n";		
+		csvData += new Student("987", 52).toString() + "\n";
+		csvData += new Student("555", 42).toString() + "\n";
+		csvData += new Student("243", 15).toString() + "\n";
+		csvData += new Student("987", 72).toString() + "\n";
 		
     	List<Student> studentsList = gradesInitializer.parseData(csvData);
 				
@@ -91,15 +91,15 @@ public class GradesInitializerTester {
 		/* This test checks that only the last grade will be in the list */
 		String csvData = "";
 		
-		csvData += new Student("012", 100).toString() + System.lineSeparator();
-		csvData += new Student("987", 11).toString() + System.lineSeparator();
-		csvData += new Student("243", 21).toString() + System.lineSeparator();
-		csvData += new Student("444", 33).toString() + System.lineSeparator();
-		csvData += new Student("999999", 65).toString() + System.lineSeparator();		
-		csvData += new Student("987", 52).toString() + System.lineSeparator();
-		csvData += new Student("555", 42).toString() + System.lineSeparator();
-		csvData += new Student("243", 15).toString() + System.lineSeparator();
-		csvData += new Student("987", 72).toString() + System.lineSeparator();
+		csvData += new Student("012", 100).toString() + "\n";
+		csvData += new Student("987", 11).toString() + "\n";
+		csvData += new Student("243", 21).toString() + "\n";
+		csvData += new Student("444", 33).toString() + "\n";
+		csvData += new Student("999999", 65).toString() + "\n";		
+		csvData += new Student("987", 52).toString() + "\n";
+		csvData += new Student("555", 42).toString() + "\n";
+		csvData += new Student("243", 15).toString() + "\n";
+		csvData += new Student("987", 72).toString() + "\n";
 				
     	IStudentsDatabase studentDBMock = Mockito.mock(IStudentsDatabase.class);
     	

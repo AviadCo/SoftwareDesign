@@ -39,7 +39,7 @@ public class GradesInitializer {
 	  	}
 	  	
 	  	/* Removing duplications of students and stores only the last student data */	  	
-		List<Student> studentsList = Arrays.asList(csvData.split(System.lineSeparator())).stream().map( s-> new Student(s)).collect(Collectors.toList());
+		List<Student> studentsList = Arrays.asList(csvData.split("\n")).stream().map( s-> new Student(s)).collect(Collectors.toList());
 		List<Student> reverseStudentsList = studentsList.subList(0, studentsList.size());
 		Collections.reverse(reverseStudentsList);
 		return reverseStudentsList.stream()
